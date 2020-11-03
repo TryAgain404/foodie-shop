@@ -2,6 +2,6 @@ server:
   port: 8088
 
 spring:
-  datasource:                                           # 数据源的相关配置
+  datasource:  # 数据源的相关配置
     url: jdbc:mysql://localhost:3306/foodie-shop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     password: root

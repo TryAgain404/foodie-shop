@@ -1,0 +1,16 @@
+com\imooc\entitys\ItemsParam.class
+com\imooc\entitys\Items.class
+com\imooc\entitys\bo\UserBO.class
+com\imooc\entitys\Carousel.class
+com\imooc\entitys\OrderStatus.class
+com\imooc\entitys\Category.class
+com\imooc\entitys\ItemsSpec.class
+com\imooc\entitys\vo\CategoryVO.class
+com\imooc\entitys\UserAddress.class
+com\imooc\entitys\vo\SubCategoryVO.class
+com\imooc\entitys\ItemsImg.class
+com\imooc\entitys\ItemsComments.class
+com\imooc\entitys\PdmanDbVersion.class
+com\imooc\entitys\Users.class
+com\imooc\entitys\OrderItems.class
+com\imooc\entitys\Orders.class

@@ -4,6 +4,7 @@ D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\u
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\utils\Ip.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\HttpContextUtils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\Code.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\JsonUtils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\xss\HTMLFilter.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\DayCode.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\Sid.java
@@ -11,11 +12,14 @@ D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\u
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\exception\RRException.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\strategy\DefaultRandomCodeStrategy.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\xss\XssHttpServletRequestWrapper.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\config\WebMvcConfig.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\config\SwaggerConfig.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\R.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\validator\Assert.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\Test.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\PageUtils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\exception\RRExceptionHandler.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\MD5Utils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\SpringContextUtils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\validator\group\Group.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\config\CorsConfig.java
@@ -36,5 +40,7 @@ D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\s
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\xss\SQLFilter.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\enums\ResultEnum.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\xss\XssFilter.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\enums\YesOrNo.java
+D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\CookieUtils.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\org\n3r\idworker\Id.java
 D:\ideaWorkSpace\foodie-shop\foodie-shop-common\src\main\java\com\imooc\utils\validator\group\UpdateGroup.java

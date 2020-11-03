@@ -1,19 +1,24 @@
 package com.imooc.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.imooc.entitys.BO.UsnerBO;
+import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.Users;
 import com.imooc.mapper.UsersMapper;
 import com.imooc.service.UsersService;
+import com.imooc.utils.MD5Utils;
 import com.imooc.utils.enums.Sex;
+import com.imooc.utils.exception.RRException;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+/**
+ * @author TryAgain404
+ */
 @Service("usersService")
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements UsersService {
 
@@ -22,25 +27,32 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     private Sid sid;
 
     @Override
-    public Users getUsernameIsExit(String username) {
+    public boolean getUsernameIsExit(String username) {
         Users user = baseMapper.getUsernameIsExit(username);
-        return user;
+        return user == null;
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void saveUser(UsnerBO usnerBO) {
+    @Transactional(rollbackFor = Exception.class)
+    public Users saveUser(UserBO userBO) {
         //sha256加密
         Users user = new Users();
         user.setId(sid.nextShort());
-        user.setUsername(usnerBO.getUsername());
-        user.setPassword(usnerBO.getPassword());
+        user.setUsername(userBO.getUsername());
+        user.setPassword(MD5Utils.getMD5Str(userBO.getPassword()));
         user.setFace(USER_FACE);
         user.setSex(Sex.secret.type);
+        user.setNickname(userBO.getUsername());
         user.setCreatedTime(new Date());
         user.setBirthday(new Date());
         user.setUpdatedTime(new Date());
-        this.save(user);
+        boolean isSave = this.save(user);
+        if (isSave) {
+            setNullProperty(user);
+            System.err.println(user);
+            return user;
+        }
+        throw new RRException("新建用户失败");
     }
 
     @Override
@@ -49,8 +61,30 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void update(Users users) {
         this.updateById(users);
+    }
+
+    @Override
+    public Users login(UserBO user) {
+        QueryWrapper<Users> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", user.getUsername());
+        queryWrapper.eq("password", MD5Utils.getMD5Str(user.getPassword()));
+        Users userResult = this.getOne(queryWrapper);
+        if (userResult == null) {
+            throw new RRException("用户名或者密码错误");
+        }
+        setNullProperty(userResult);
+        return userResult;
+    }
+
+    private void setNullProperty(Users userResult) {
+        userResult.setPassword(null);
+        userResult.setMobile(null);
+        userResult.setEmail(null);
+        userResult.setCreatedTime(null);
+        userResult.setUpdatedTime(null);
+        userResult.setBirthday(null);
     }
 }

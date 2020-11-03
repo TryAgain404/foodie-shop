@@ -2,8 +2,8 @@ package com.imooc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.Category;
-import com.imooc.utils.PageUtils;
-import java.util.Map;
+
+import java.util.List;
 
 /**
  * 商品分类
@@ -14,5 +14,18 @@ import java.util.Map;
  */
 public interface CategoryService extends IService<Category> {
 
+    /**
+     * 获取一级分类
+     * @param type 一级类Id
+     * @return
+     */
+    List<Category> getParentNames(Integer type);
+
+    /**
+     * 获得各个分类下的最新6个商品
+     * @param rootCatId 父分类Id
+     * @return
+     */
+    List<Category> getSubCatList(Integer rootCatId);
 }
 

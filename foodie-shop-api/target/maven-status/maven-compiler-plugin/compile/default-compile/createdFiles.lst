@@ -1,1 +1,5 @@
-com\imooc\config\SwaggerConfig.class
+com\imooc\config\MybatisPlusOutImpl.class
+com\imooc\Application.class
+com\imooc\controller\IndexController.class
+com\imooc\aspect\ServiceLogAspect.class
+com\imooc\controller\UserController.class

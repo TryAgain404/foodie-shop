@@ -1,7 +1,7 @@
 package com.imooc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.imooc.entitys.BO.UsnerBO;
+import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.Users;
 
 /**
@@ -13,13 +13,14 @@ import com.imooc.entitys.Users;
  */
 public interface UsersService extends IService<Users> {
 
-    Users getUsernameIsExit(String username);
+    boolean getUsernameIsExit(String username);
 
-    void saveUser(UsnerBO users);
+    Users saveUser(UserBO users);
 
     void deleteUser(String id);
 
     void update(Users users);
 
+    Users login(UserBO user);
 }
 

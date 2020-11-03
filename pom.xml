@@ -33,12 +33,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.boot</groupId>-->
-<!--                    <artifactId>spring-boot-starter-logging</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
         </dependency>
 
         <dependency>
@@ -140,12 +134,8 @@
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
-        <!-- pagehelper 分页插件 -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--            <version>1.2.5</version>-->
-<!--        </dependency>-->
+        <!--引入日志依赖 抽象层 与 实现层-->
+
     </dependencies>
 
 

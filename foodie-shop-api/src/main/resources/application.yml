@@ -29,7 +29,7 @@ spring:
 
 ############################################################
 #
-# mybatis 配置
+# mybatis 配置 com.imooc.config.MybatisPlusOutImpl
 #
 ############################################################
 mybatis-plus:
@@ -40,6 +40,7 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
     map-underscore-to-camel-case: true
+    log-impl: com.imooc.config.MybatisPlusOutImpl
   global-config:
     banner: false
     db-config:
