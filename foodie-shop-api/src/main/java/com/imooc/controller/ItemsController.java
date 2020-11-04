@@ -71,6 +71,20 @@ public class ItemsController {
         return R.success(pages);
     }
 
+    @GetMapping("/search")
+    @ApiOperation(value = "搜索商品", notes = "搜索商品", httpMethod = "GET")
+    public R search(@ApiParam(name = "keywords", value = "关键词", required = true)
+                      @RequestParam("keywords") String keywords,
+                      @ApiParam(name = "sort", value = "评论等级", required = true)
+                      @RequestParam("sort") String sort,
+                      @ApiParam(name = "pages", value = "当前页", required = true)
+                      @RequestParam("pages") Integer page,
+                      @ApiParam(name = "pageSize", value = "页面显示数量", required = true)
+                      @RequestParam("pageSize") Integer pageSize) {
 
+        PageUtils pages = itemsCommentsService.searchPage(keywords, sort, page, pageSize);
+
+        return R.success(pages);
+    }
 
 }

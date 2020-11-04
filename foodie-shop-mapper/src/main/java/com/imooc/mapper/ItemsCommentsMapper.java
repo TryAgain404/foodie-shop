@@ -28,4 +28,14 @@ public interface ItemsCommentsMapper extends BaseMapper<ItemsComments> {
      */
     IPage<ItemCommentVO> queryItemComments(IPage<ItemCommentVO> page, @Param("itemId") String itemId,
                                            @Param("level") Integer level);
+
+    /**
+     * 用于展示搜索商品
+     * @param page 分页
+     * @param keyword 关键词
+     * @param sort 排序
+     * @return
+     */
+    IPage<ItemCommentVO> searchItemsByThirdCat(IPage<ItemCommentVO> page, @Param("keyword") String keyword,
+                                           @Param("sort") String sort);
 }

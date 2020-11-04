@@ -17,4 +17,7 @@ public interface ItemsCommentsService extends IService<ItemsComments> {
                         Integer page, Integer pageSize);
 
     CommentLevelCountsVO getCommentLevel(String itemId);
+
+    PageUtils searchPage(String keyword, String sort,
+                        Integer page, Integer pageSize);
 }

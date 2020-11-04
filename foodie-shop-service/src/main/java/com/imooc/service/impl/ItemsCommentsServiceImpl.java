@@ -9,10 +9,12 @@ import com.imooc.entitys.vo.CommentLevelCountsVO;
 import com.imooc.entitys.vo.ItemCommentVO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.service.ItemsCommentsService;
+import com.imooc.utils.DesensitizationUtil;
 import com.imooc.utils.PageUtils;
 import com.imooc.utils.enums.Level;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,13 +26,24 @@ public class ItemsCommentsServiceImpl extends ServiceImpl<ItemsCommentsMapper, I
 
 
     @Override
-    public PageUtils queryPage(String itemId, Integer level,
-                               Integer pages, Integer pageSize) {
+    public PageUtils queryPage(String itemId, Integer level, Integer pages, Integer pageSize) {
 
-        IPage<ItemCommentVO> page = baseMapper.queryItemComments((
-                new Page<>(pages,
-                        pageSize)), itemId, level);
+        IPage<ItemCommentVO> page = baseMapper.queryItemComments((new Page<>(pages, pageSize)), itemId, level);
+        /**
+         * 脱敏操作
+         */
+        List<ItemCommentVO> records = page.getRecords();
+        for (ItemCommentVO vo : records) {
+            vo.setNickname(DesensitizationUtil.commonDisplay(vo.getNickname()));
+        }
+        page.setRecords(records);
 
+        return new PageUtils(page);
+    }
+
+    @Override
+    public PageUtils searchPage(String keyword, String sort, Integer pages, Integer pageSize) {
+        IPage<ItemCommentVO> page = baseMapper.searchItemsByThirdCat(new Page<>(pages, pageSize), keyword, sort);
         return new PageUtils(page);
     }
 
