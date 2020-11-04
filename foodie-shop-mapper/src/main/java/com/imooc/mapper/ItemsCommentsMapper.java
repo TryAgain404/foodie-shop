@@ -1,8 +1,13 @@
 package com.imooc.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imooc.entitys.ItemsComments;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.imooc.entitys.vo.ItemCommentVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 商品评价表 
@@ -14,4 +19,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ItemsCommentsMapper extends BaseMapper<ItemsComments> {
 
+    /**
+     * 获取好评
+     * @param page
+     * @param itemId
+     * @param level
+     * @return
+     */
+    IPage<ItemCommentVO> queryItemComments(IPage<ItemCommentVO> page, @Param("itemId") String itemId,
+                                           @Param("level") Integer level);
 }

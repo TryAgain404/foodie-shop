@@ -2,6 +2,8 @@ package com.imooc.mapper;
 
 import com.imooc.entitys.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.imooc.entitys.vo.CategoryVO;
+import com.imooc.entitys.vo.NewItemsVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,6 +24,13 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @param rootCatId
      * @return
      */
-    List<Category> getSubCatList(@Param("rootCatId") Integer rootCatId);
+    List<CategoryVO> getSubCatList(@Param("rootCatId") Integer rootCatId);
+
+    /**
+     * 获取最新的六个商品
+     * @param rootCatId
+     * @return
+     */
+    List<NewItemsVO> getSixNewItemsLazy(@Param("rootCatId") Integer rootCatId);
 
 }

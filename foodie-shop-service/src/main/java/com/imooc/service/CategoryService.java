@@ -2,6 +2,9 @@ package com.imooc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.Category;
+import com.imooc.entitys.vo.CategoryVO;
+import com.imooc.entitys.vo.NewItemsVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,6 +29,8 @@ public interface CategoryService extends IService<Category> {
      * @param rootCatId 父分类Id
      * @return
      */
-    List<Category> getSubCatList(Integer rootCatId);
+    List<CategoryVO> getSubCatList(Integer rootCatId);
+
+    List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId);
 }
 

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.imooc.entitys.Category;
+import com.imooc.entitys.vo.CategoryVO;
+import com.imooc.entitys.vo.NewItemsVO;
 import com.imooc.mapper.CategoryMapper;
 import com.imooc.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public List<Category> getSubCatList(Integer rootCatId) {
+    public List<CategoryVO> getSubCatList(Integer rootCatId) {
 
         return baseMapper.getSubCatList(rootCatId);
+    }
+
+    @Override
+    public List<NewItemsVO> getSixNewItemsLazy(Integer rootCatId) {
+        return baseMapper.getSixNewItemsLazy(rootCatId);
     }
 }

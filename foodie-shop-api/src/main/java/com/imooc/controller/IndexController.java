@@ -2,6 +2,8 @@ package com.imooc.controller;
 
 import com.imooc.entitys.Carousel;
 import com.imooc.entitys.Category;
+import com.imooc.entitys.vo.CategoryVO;
+import com.imooc.entitys.vo.NewItemsVO;
 import com.imooc.service.CarouselService;
 import com.imooc.service.CategoryService;
 import com.imooc.utils.R;
@@ -51,7 +53,18 @@ public class IndexController {
         if (rootCatId == null) {
             return R.error("分类不存在");
         }
-        List<Category> categories = categoryService.getSubCatList(rootCatId);
+        List<CategoryVO> categories = categoryService.getSubCatList(rootCatId);
+        return R.success(categories);
+    }
+
+    @GetMapping("/sixNewItems/{rootCatId}")
+    @ApiOperation(value = "获得各个分类下的最新6个商品", notes = "获得各个分类下的最新6个商品", httpMethod = "GET")
+    public R sixNewItems(@ApiParam(name = "rootCatId", value = "一级分类id", required = true)
+                    @PathVariable("rootCatId") Integer rootCatId) {
+        if (rootCatId == null) {
+            return R.error("分类不存在");
+        }
+        List<NewItemsVO> categories = categoryService.getSixNewItemsLazy(rootCatId);
         return R.success(categories);
     }
 

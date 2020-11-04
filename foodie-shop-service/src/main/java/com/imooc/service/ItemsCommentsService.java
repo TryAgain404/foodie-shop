@@ -2,15 +2,19 @@ package com.imooc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.ItemsComments;
+import com.imooc.entitys.vo.CommentLevelCountsVO;
+import com.imooc.utils.PageUtils;
+
+import java.util.Map;
 
 /**
- * 商品评价表
- *
  * @author TryAgain404
- * @email TryAgain500@163.com
- * @date 2020-10-21 11:33:24
+ * @date 2020-11-4 14:23
  */
 public interface ItemsCommentsService extends IService<ItemsComments> {
 
-}
+    PageUtils queryPage(String itemId, Integer level,
+                        Integer page, Integer pageSize);
 
+    CommentLevelCountsVO getCommentLevel(String itemId);
+}

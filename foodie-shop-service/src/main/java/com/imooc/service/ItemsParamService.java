@@ -12,5 +12,12 @@ import com.imooc.entitys.ItemsParam;
  */
 public interface ItemsParamService extends IService<ItemsParam> {
 
+    /**
+     * 根据商品id查询商品参数
+     * @param itemId
+     * @return
+     */
+    ItemsParam queryItemParam(String itemId);
+
 }
 
