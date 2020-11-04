@@ -30,12 +30,22 @@ public interface ItemsCommentsMapper extends BaseMapper<ItemsComments> {
                                            @Param("level") Integer level);
 
     /**
-     * 用于展示搜索商品
+     * 用于展示关键词搜索商品
      * @param page 分页
      * @param keyword 关键词
      * @param sort 排序
      * @return
      */
-    IPage<ItemCommentVO> searchItemsByThirdCat(IPage<ItemCommentVO> page, @Param("keyword") String keyword,
+    IPage<ItemCommentVO> searchItems(IPage<ItemCommentVO> page, @Param("keyword") String keyword,
                                            @Param("sort") String sort);
+
+    /**
+     * 根据商品的id搜索商品
+     * @param page 分页
+     * @param catId 关键词
+     * @param sort 排序
+     * @return
+     */
+    IPage<ItemCommentVO> searchItemsByThirdCat(IPage<ItemCommentVO> page, @Param("catId") String catId,
+                                               @Param("sort") String sort);
 }

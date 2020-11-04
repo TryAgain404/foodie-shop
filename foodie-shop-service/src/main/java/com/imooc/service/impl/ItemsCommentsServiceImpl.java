@@ -43,7 +43,13 @@ public class ItemsCommentsServiceImpl extends ServiceImpl<ItemsCommentsMapper, I
 
     @Override
     public PageUtils searchPage(String keyword, String sort, Integer pages, Integer pageSize) {
-        IPage<ItemCommentVO> page = baseMapper.searchItemsByThirdCat(new Page<>(pages, pageSize), keyword, sort);
+        IPage<ItemCommentVO> page = baseMapper.searchItems(new Page<>(pages, pageSize), keyword, sort);
+        return new PageUtils(page);
+    }
+
+    @Override
+    public PageUtils searchByThirdCatPage(String catId, String sort, Integer pages, Integer pageSize) {
+        IPage<ItemCommentVO> page = baseMapper.searchItemsByThirdCat(new Page<>(pages, pageSize), catId, sort);
         return new PageUtils(page);
     }
 

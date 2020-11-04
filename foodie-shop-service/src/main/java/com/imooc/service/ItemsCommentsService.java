@@ -20,4 +20,7 @@ public interface ItemsCommentsService extends IService<ItemsComments> {
 
     PageUtils searchPage(String keyword, String sort,
                         Integer page, Integer pageSize);
+
+    PageUtils searchByThirdCatPage(String catId, String sort,
+                         Integer page, Integer pageSize);
 }
