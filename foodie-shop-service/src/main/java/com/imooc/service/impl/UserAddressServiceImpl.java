@@ -68,6 +68,13 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressMapper, UserA
 
     @Override
     public void setDefalut(String userId, String addressId) {
+        List<UserAddress> deDefalutAddress = getDeDefalutAddress();
+        if (StringUtils.isNotNull(deDefalutAddress)) {
+            for (UserAddress userAddress : deDefalutAddress) {
+                userAddress.setIsDefault(YesOrNo.no.type);
+                this.updateById(userAddress);
+            }
+        }
         UserAddress userAddress = getUserAddress(userId, addressId);
         if (StringUtils.isNull(userAddress)) {
             throw new RRException("参数错误。查询地址为空");
@@ -80,5 +87,9 @@ public class UserAddressServiceImpl extends ServiceImpl<UserAddressMapper, UserA
     private UserAddress getUserAddress(String userId, String addressId) {
         return getOne(new QueryWrapper<UserAddress>().lambda().
                 eq(UserAddress::getUserId, userId).eq(UserAddress::getId, addressId));
+    }
+
+    private List<UserAddress> getDeDefalutAddress() {
+        return list(new QueryWrapper<UserAddress>().lambda().eq(UserAddress::getIsDefault, YesOrNo.yes.type));
     }
 }
