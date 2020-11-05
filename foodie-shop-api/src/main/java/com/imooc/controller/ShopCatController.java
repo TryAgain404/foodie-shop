@@ -17,22 +17,32 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("shopcart")
 @Api(value = "购物车接口controller", tags = {"购物车接口相关的api"})
-public class ShopcatController {
+public class ShopCatController {
 
     @ApiOperation(value = "添加商品到购物车", notes = "添加商品到购物车", httpMethod = "POST")
     @PostMapping("/add")
-    public R add(
-            @RequestParam String userId,
-            @RequestBody ShopCartBO shopcartBO,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
+    public R add(@RequestParam String userId, @RequestBody ShopCartBO shopcartBO,
+                 HttpServletRequest request, HttpServletResponse response) {
 
         if (StringUtils.isBlank(userId)) {
             return R.error("");
         }
 
         System.out.println(shopcartBO);
+
+        // TODO 前端用户在登录的情况下，添加商品到购物车，会同时在后端同步购物车到redis缓存
+
+        return R.success();
+    }
+
+    @ApiOperation(value = "添加商品到购物车", notes = "添加商品到购物车", httpMethod = "POST")
+    @PostMapping("/del")
+    public R del(@RequestParam String userId, @RequestParam String itemSpecId,
+                 HttpServletRequest request, HttpServletResponse response) {
+
+        if (StringUtils.isBlank(userId) || "".equals(userId)) {
+            return R.error("");
+        }
 
         // TODO 前端用户在登录的情况下，添加商品到购物车，会同时在后端同步购物车到redis缓存
 
