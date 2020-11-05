@@ -26,14 +26,13 @@ public class Users implements Serializable {
 	public Users() {
 	}
 
-	public Users(String id, String username, String password, String salt, String nickname,
+	public Users(String id, String username, String password, String nickname,
 				 String realname, String face,
 				 @NotBlank(message = "手机不能为空", groups = {AddGroup.class}) String mobile, String email, Integer sex,
 				 Date birthday, Date createdTime, Date updatedTime) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.salt = salt;
 		this.nickname = nickname;
 		this.realname = realname;
 		this.face = face;
@@ -71,14 +70,6 @@ public class Users implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
 	public String getNickname() {
@@ -166,10 +157,6 @@ public class Users implements Serializable {
 	 * 密码 密码
 	 */
 	private String password;
-	/**
-	 * 盐
-	 */
-	private String salt;
 	/**
 	 * 昵称 昵称
 	 */

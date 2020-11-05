@@ -28,8 +28,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     @Override
     public boolean getUsernameIsExit(String username) {
-        Users user = baseMapper.getUsernameIsExit(username);
-        return user == null;
+
+        return getOne(new QueryWrapper<Users>().lambda().eq(Users::getUsername, username)) == null;
     }
 
     @Override

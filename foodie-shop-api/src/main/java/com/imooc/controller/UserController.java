@@ -50,9 +50,9 @@ public class UserController {
         return R.success();
     }
 
-    @PostMapping("/save")
+    @PostMapping("/regist")
     @ApiOperation(value = "创建用户", notes = "创建用户", httpMethod = "POST")
-    public R save(@RequestBody UserBO users, HttpServletRequest request, HttpServletResponse response) {
+    public R regist(@RequestBody UserBO users, HttpServletRequest request, HttpServletResponse response) {
         ValidatorUtils.validateEntity(users, AddGroup.class);
         if (!users.getPassword().equals(users.getConfirmPassword())) {
             return R.error("两次密码不正确");
