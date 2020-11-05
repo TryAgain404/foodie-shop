@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.imooc.entitys.ItemsComments;
 import com.imooc.entitys.vo.CommentLevelCountsVO;
 import com.imooc.entitys.vo.ItemCommentVO;
+import com.imooc.entitys.vo.ShopCartVO;
 import com.imooc.mapper.ItemsCommentsMapper;
 import com.imooc.service.ItemsCommentsService;
 import com.imooc.utils.DesensitizationUtil;
@@ -14,6 +15,8 @@ import com.imooc.utils.PageUtils;
 import com.imooc.utils.enums.Level;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +54,15 @@ public class ItemsCommentsServiceImpl extends ServiceImpl<ItemsCommentsMapper, I
     public PageUtils searchByThirdCatPage(String catId, String sort, Integer pages, Integer pageSize) {
         IPage<ItemCommentVO> page = baseMapper.searchItemsByThirdCat(new Page<>(pages, pageSize), catId, sort);
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<ShopCartVO> queryItemsBySpecIds(String specIds) {
+        String ids[] = specIds.split(",");
+        List<String> specIdsList = new ArrayList<>();
+        Collections.addAll(specIdsList, ids);
+
+        return baseMapper.queryItemsBySpecIds(specIdsList);
     }
 
     @Override

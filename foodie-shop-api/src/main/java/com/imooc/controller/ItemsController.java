@@ -2,7 +2,8 @@ package com.imooc.controller;
 
 import com.imooc.entitys.vo.CommentLevelCountsVO;
 import com.imooc.entitys.vo.ItemsResultVO;
-import com.imooc.service.*;
+import com.imooc.entitys.vo.ShopCartVO;
+import com.imooc.service.ItemsCommentsService;
 import com.imooc.service.impl.ItemsServices;
 import com.imooc.utils.PageUtils;
 import com.imooc.utils.R;
@@ -14,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author TryAgain404
@@ -102,5 +102,22 @@ public class ItemsController {
 
         return R.success(pages);
     }
+
+
+    @ApiOperation(value = "根据商品规格ids查找最新的商品数据", notes = "根据商品规格ids查找最新的商品数据", httpMethod = "GET")
+    @GetMapping("/refresh")
+    public R refresh(
+            @ApiParam(name = "itemSpecIds", value = "拼接的规格ids", required = true, example = "1001,1003,1005")
+            @RequestParam String itemSpecIds) {
+
+        if (StringUtils.isEmpty(itemSpecIds)) {
+            return R.error("");
+        }
+
+        List<ShopCartVO> list = itemsCommentsService.queryItemsBySpecIds(itemSpecIds);
+
+        return R.success(list);
+    }
+
 
 }

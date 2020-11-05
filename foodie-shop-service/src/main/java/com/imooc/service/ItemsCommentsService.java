@@ -3,9 +3,10 @@ package com.imooc.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.ItemsComments;
 import com.imooc.entitys.vo.CommentLevelCountsVO;
+import com.imooc.entitys.vo.ShopCartVO;
 import com.imooc.utils.PageUtils;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author TryAgain404
@@ -23,4 +24,6 @@ public interface ItemsCommentsService extends IService<ItemsComments> {
 
     PageUtils searchByThirdCatPage(String catId, String sort,
                          Integer page, Integer pageSize);
+
+    List<ShopCartVO> queryItemsBySpecIds(String specIdsList);
 }
