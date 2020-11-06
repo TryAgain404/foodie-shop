@@ -43,5 +43,13 @@ public interface UserAddressService extends IService<UserAddress> {
      * @param addressId 地址Id
      */
     void setDefalut(String userId, String addressId);
+
+    /**
+     * 获取地址
+     * @param userId 用户Id
+     * @param addressId 地址Id
+     * @return UserAddress
+     */
+    UserAddress getUserAddress(String userId, String addressId);
 }
 

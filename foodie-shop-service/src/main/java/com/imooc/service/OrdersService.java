@@ -2,6 +2,8 @@ package com.imooc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.Orders;
+import com.imooc.entitys.bo.OrderBO;
+import com.imooc.entitys.vo.OrderVO;
 
 /**
  * 订单表
@@ -12,5 +14,6 @@ import com.imooc.entitys.Orders;
  */
 public interface OrdersService extends IService<Orders> {
 
+    OrderVO createOrder(OrderBO orderBO);
 }
 
