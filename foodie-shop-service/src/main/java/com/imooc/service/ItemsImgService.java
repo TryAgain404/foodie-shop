@@ -20,6 +20,12 @@ public interface ItemsImgService extends IService<ItemsImg> {
      * @return
      */
      List<ItemsImg> queryItemImgList(String itemId);
+    /**
+     * 获取主图链接
+     * @param itemId
+     * @return
+     */
+    String queryItemMainImgById(String itemId);
 
 }
 

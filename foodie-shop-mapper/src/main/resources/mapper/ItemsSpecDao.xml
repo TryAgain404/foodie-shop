@@ -3,6 +3,15 @@
 
 <mapper namespace="com.imooc.mapper.ItemsSpecMapper">
 
-
+    <update id="decreaseItemSpecStock">
+        update
+            items_spec
+        set
+            stock = stock - #{pendingCounts}
+        where
+            id = #{specId}
+        and
+            stock >= #{pendingCounts}
+    </update>
 
 </mapper>

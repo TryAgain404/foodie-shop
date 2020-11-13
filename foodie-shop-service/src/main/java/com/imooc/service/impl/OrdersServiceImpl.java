@@ -6,8 +6,8 @@ import com.imooc.entitys.bo.OrderBO;
 import com.imooc.entitys.vo.MerchantOrdersVO;
 import com.imooc.entitys.vo.OrderVO;
 import com.imooc.mapper.OrdersMapper;
-import com.imooc.service.OrdersService;
-import com.imooc.service.UserAddressService;
+import com.imooc.service.*;
+import com.imooc.utils.enums.OrderStatusEnum;
 import com.imooc.utils.enums.YesOrNo;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,16 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     private Sid sid;
     @Autowired
     UserAddressService userAddressService;
+    @Autowired
+    ItemsSpecService itemsSpecService;
+    @Autowired
+    ItemsService itemsService;
+    @Autowired
+    ItemsImgService itemsImgService;
+    @Autowired
+    OrderItemsService orderItemsServicel;
+    @Autowired
+    OrderStatusService orderStatusService;
 
     @Override
     public OrderVO createOrder(OrderBO orderBO) {
@@ -36,11 +46,8 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         String leftMsg = orderBO.getLeftMsg();
         // 包邮费用设置为0
         Integer postAmount = 0;
-
         String orderId = sid.nextShort();
-
         UserAddress address = userAddressService.getUserAddress(userId, addressId);
-
         // 1. 新订单数据保存
         Orders newOrder = new Orders();
         newOrder.setId(orderId);
@@ -69,14 +76,14 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             int buyCounts = 1;
 
             // 2.1 根据规格id，查询规格的具体信息，主要获取价格
-            ItemsSpec itemSpec = itemService.queryItemSpecById(itemSpecId);
+            ItemsSpec itemSpec = itemsSpecService.queryItemSpecById(itemSpecId);
             totalAmount += itemSpec.getPriceNormal() * buyCounts;
             realPayAmount += itemSpec.getPriceDiscount() * buyCounts;
 
             // 2.2 根据商品id，获得商品信息以及商品图片
             String itemId = itemSpec.getItemId();
-            Items item = itemService.queryItemById(itemId);
-            String imgUrl = itemService.queryItemMainImgById(itemId);
+            Items item = itemsService.queryItemById(itemId);
+            String imgUrl = itemsImgService.queryItemMainImgById(itemId);
 
             // 2.3 循环保存子订单数据到数据库
             String subOrderId = sid.nextShort();
@@ -90,22 +97,21 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             subOrderItem.setItemSpecId(itemSpecId);
             subOrderItem.setItemSpecName(itemSpec.getName());
             subOrderItem.setPrice(itemSpec.getPriceDiscount());
-            orderItemsMapper.insert(subOrderItem);
-
+            orderItemsServicel.save(subOrderItem);
             // 2.4 在用户提交订单以后，规格表中需要扣除库存
-            itemService.decreaseItemSpecStock(itemSpecId, buyCounts);
+            itemsSpecService.decreaseItemSpecStock(itemSpecId, buyCounts);
         }
 
         newOrder.setTotalAmount(totalAmount);
         newOrder.setRealPayAmount(realPayAmount);
-        ordersMapper.insert(newOrder);
+        save(newOrder);
 
         // 3. 保存订单状态表
         OrderStatus waitPayOrderStatus = new OrderStatus();
         waitPayOrderStatus.setOrderId(orderId);
         waitPayOrderStatus.setOrderStatus(OrderStatusEnum.WAIT_PAY.type);
         waitPayOrderStatus.setCreatedTime(new Date());
-        orderStatusMapper.insert(waitPayOrderStatus);
+        orderStatusService.save(waitPayOrderStatus);
 
         // 4. 构建商户订单，用于传给支付中心
         MerchantOrdersVO merchantOrdersVO = new MerchantOrdersVO();

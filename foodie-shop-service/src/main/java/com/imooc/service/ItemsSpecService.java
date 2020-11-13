@@ -20,5 +20,17 @@ public interface ItemsSpecService extends IService<ItemsSpec> {
      * @return
      */
     List<ItemsSpec> queryItemSpecList(String itemId);
+    /**
+     * 获取商品规格
+     * @param itemSpecId 商品规格ID
+     * @return ItemsSpec
+     */
+    ItemsSpec queryItemSpecById(String itemSpecId);
+    /**
+     * 减少库存
+     * @param itemSpecId
+     * @param buyCounts
+     */
+    void decreaseItemSpecStock(String itemSpecId, int buyCounts);
 }
 
