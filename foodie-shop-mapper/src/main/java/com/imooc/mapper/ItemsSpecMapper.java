@@ -19,6 +19,6 @@ public interface ItemsSpecMapper extends BaseMapper<ItemsSpec> {
      * @param pendingCounts
      * @return
      */
-    int decreaseItemSpecStock(@Param("pendingCounts") Integer pendingCounts);
+    int decreaseItemSpecStock(@Param("specId") String specId, @Param("pendingCounts") Integer pendingCounts);
 
 }

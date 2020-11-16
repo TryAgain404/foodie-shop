@@ -10,7 +10,6 @@ import com.imooc.service.*;
 import com.imooc.utils.enums.OrderStatusEnum;
 import com.imooc.utils.enums.YesOrNo;
 import org.n3r.idworker.Sid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,20 +21,30 @@ import java.util.Date;
 @Service("ordersService")
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
 
-    @Autowired
-    private Sid sid;
-    @Autowired
+    final
+    Sid sid;
+    final
     UserAddressService userAddressService;
-    @Autowired
+    final
     ItemsSpecService itemsSpecService;
-    @Autowired
+    final
     ItemsService itemsService;
-    @Autowired
+    final
     ItemsImgService itemsImgService;
-    @Autowired
+    final
     OrderItemsService orderItemsServicel;
-    @Autowired
+    final
     OrderStatusService orderStatusService;
+
+    public OrdersServiceImpl(Sid sid, UserAddressService userAddressService, ItemsSpecService itemsSpecService, ItemsService itemsService, ItemsImgService itemsImgService, OrderItemsService orderItemsServicel, OrderStatusService orderStatusService) {
+        this.sid = sid;
+        this.userAddressService = userAddressService;
+        this.itemsSpecService = itemsSpecService;
+        this.itemsService = itemsService;
+        this.itemsImgService = itemsImgService;
+        this.orderItemsServicel = orderItemsServicel;
+        this.orderStatusService = orderStatusService;
+    }
 
     @Override
     public OrderVO createOrder(OrderBO orderBO) {
@@ -45,7 +54,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         Integer payMethod = orderBO.getPayMethod();
         String leftMsg = orderBO.getLeftMsg();
         // 包邮费用设置为0
-        Integer postAmount = 0;
+        int postAmount = 0;
         String orderId = sid.nextShort();
         UserAddress address = userAddressService.getUserAddress(userId, addressId);
         // 1. 新订单数据保存

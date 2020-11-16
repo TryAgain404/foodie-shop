@@ -13,6 +13,10 @@ public class Constant {
      */
     public static final String SQL_FILTER = "sql_filter";
     /**
+     * 返回成功状态码
+     */
+    public static final Integer SUCCESS = 200;
+    /**
      * 当前页码
      */
     public static final String PAGE = "page";

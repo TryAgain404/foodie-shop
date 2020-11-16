@@ -50,7 +50,7 @@ public class UserController {
         return R.success();
     }
 
-    @PostMapping("/regist")
+    @PostMapping("/save")
     @ApiOperation(value = "创建用户", notes = "创建用户", httpMethod = "POST")
     public R regist(@RequestBody UserBO users, HttpServletRequest request, HttpServletResponse response) {
         ValidatorUtils.validateEntity(users, AddGroup.class);
