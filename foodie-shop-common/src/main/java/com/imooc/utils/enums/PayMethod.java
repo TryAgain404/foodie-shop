@@ -5,6 +5,9 @@ package com.imooc.utils.enums;
  * @date 2020-11-16 9:52
  */
 public enum PayMethod {
+    /**
+     * 支付方式
+     */
     WEIXIN(1, "微信"),
     ALIPAY(2, "支付宝"),;
 

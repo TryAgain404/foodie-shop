@@ -5,7 +5,9 @@ package com.imooc.utils.enums;
  * @date 2020-11-3 15:47
  */
 public enum Level {
-
+    /**
+     *
+     */
     GOOD(1, "好评"),
     NORMA(2, "中评"),
     BAD(3, "差评");

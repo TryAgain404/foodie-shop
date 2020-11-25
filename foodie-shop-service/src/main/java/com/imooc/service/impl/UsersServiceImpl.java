@@ -49,7 +49,6 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         boolean isSave = this.save(user);
         if (isSave) {
             setNullProperty(user);
-            System.err.println(user);
             return user;
         }
         throw new RRException("新建用户失败");

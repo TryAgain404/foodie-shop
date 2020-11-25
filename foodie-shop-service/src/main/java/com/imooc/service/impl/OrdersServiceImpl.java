@@ -36,7 +36,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     final
     OrderStatusService orderStatusService;
 
-    public OrdersServiceImpl(Sid sid, UserAddressService userAddressService, ItemsSpecService itemsSpecService, ItemsService itemsService, ItemsImgService itemsImgService, OrderItemsService orderItemsServicel, OrderStatusService orderStatusService) {
+    public OrdersServiceImpl(Sid sid, UserAddressService userAddressService, ItemsSpecService itemsSpecService,
+                             ItemsService itemsService, ItemsImgService itemsImgService, OrderItemsService orderItemsServicel,
+                             OrderStatusService orderStatusService) {
         this.sid = sid;
         this.userAddressService = userAddressService;
         this.itemsSpecService = itemsSpecService;

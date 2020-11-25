@@ -5,7 +5,9 @@ package com.imooc.utils.enums;
  * @date 2020-11-3 15:47
  */
 public enum YesOrNo {
-
+    /**
+     *
+     */
     no(0, "否"),
     yes(1, "是"),;
 

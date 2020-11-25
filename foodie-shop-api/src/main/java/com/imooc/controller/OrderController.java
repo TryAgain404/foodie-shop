@@ -42,7 +42,7 @@ public class OrderController {
 
     /**
      * 微信支付成功 -> 支付中心 -> 天天吃货平台
-     *                          |-> 回调通知的url
+     *                        |-> 回调通知的url
      */
     private String payReturnUrl = "http://api.z.mukewang.com/foodie-dev-api/orders/notifyMerchantOrderPaid";
 
@@ -91,6 +91,7 @@ public class OrderController {
                         entity,
                         R.class);
         R paymentResult = responseEntity.getBody();
+        assert paymentResult != null;
         if (!paymentResult.getCode().equals(Constant.SUCCESS)) {
             logger.error("发送错误：{}", paymentResult.getMsg());
             return R.error("支付中心订单创建失败，请联系管理员！");
