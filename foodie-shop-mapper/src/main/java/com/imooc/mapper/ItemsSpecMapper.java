@@ -17,7 +17,7 @@ public interface ItemsSpecMapper extends BaseMapper<ItemsSpec> {
     /**
      * 库存
      * @param pendingCounts
-     * @return
+     * @return 库存库量
      */
     int decreaseItemSpecStock(@Param("specId") String specId, @Param("pendingCounts") Integer pendingCounts);
 

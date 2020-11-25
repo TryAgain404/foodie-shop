@@ -7,6 +7,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @author TryAgain404
+ */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -16,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/statics/**").addResourceLocations("classpath:/statics/");
-        registry.addResourceHandler("/images/**").addResourceLocations("file:D:/foodie/faces/");
+        registry.addResourceHandler("/images/**").addResourceLocations("file:D:/foodie/faces");
     }
 
     @Bean
