@@ -2,6 +2,7 @@ package com.imooc.controller;
 
 import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.Users;
+import com.imooc.entitys.security.LoginBody;
 import com.imooc.service.UsersService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.JsonUtils;
@@ -79,31 +80,4 @@ public class UserController {
         usersService.update(user);
         return R.success();
     }
-
-    @PostMapping("/login")
-    @ApiOperation(value = "用户登录", notes = "用户登录", httpMethod = "POST")
-    public R login(@RequestBody UserBO user, HttpServletRequest request, HttpServletResponse response) {
-        ValidatorUtils.validateEntity(user, AddGroup.class);
-        Users userResult = usersService.login(user);
-        CookieUtils.setCookie(request, response, "user",
-                JsonUtils.objectToJson(userResult), true);
-        return R.success();
-    }
-
-
-    @GetMapping("/logout/{userId}")
-    @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "GET")
-    public R logout(@PathVariable(value = "userId") String userId, HttpServletRequest request,
-                    HttpServletResponse response
-                    ) {
-        if (userId == null || "".equals(userId)) {
-            throw new RRException("用户Id不合法");
-        }
-
-        logger.error("用户退出成功");
-        CookieUtils.deleteCookie(request, response, "user");
-
-        return R.success("退出成功");
-    }
-
 }

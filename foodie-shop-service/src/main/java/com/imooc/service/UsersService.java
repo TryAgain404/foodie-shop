@@ -3,6 +3,7 @@ package com.imooc.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.Users;
+import com.imooc.entitys.security.LoginBody;
 
 /**
  * 用户表
@@ -21,6 +22,8 @@ public interface UsersService extends IService<Users> {
 
     void update(Users users);
 
-    Users login(UserBO user);
+    String login(LoginBody user);
+
+    Users getUserByUsername(String username);
 }
 
