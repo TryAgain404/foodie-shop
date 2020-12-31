@@ -1,4 +1,4 @@
-package com.imooc.service.security;
+package com.imooc.service.common.impl;
 
 import com.imooc.entitys.Users;
 import com.imooc.entitys.security.LoginUser;

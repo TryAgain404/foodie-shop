@@ -2,7 +2,7 @@ package com.imooc.config;
 
 import com.imooc.entitys.security.LoginUser;
 import com.imooc.utils.SecurityUtils;
-import com.imooc.service.security.TokenService;
+import com.imooc.service.common.impl.TokenService;
 import com.imooc.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

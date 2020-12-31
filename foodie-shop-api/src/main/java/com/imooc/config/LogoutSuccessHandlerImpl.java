@@ -2,7 +2,7 @@ package com.imooc.config;
 
 import com.alibaba.fastjson.JSON;
 import com.imooc.entitys.security.LoginUser;
-import com.imooc.service.security.TokenService;
+import com.imooc.service.common.impl.TokenService;
 import com.imooc.utils.R;
 import com.imooc.utils.ServletUtils;
 import com.imooc.utils.StringUtils;

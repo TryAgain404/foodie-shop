@@ -1,21 +1,14 @@
-package com.imooc.controller;
+package com.imooc.controller.common;
 
-import com.imooc.entitys.SysMenu;
 import com.imooc.entitys.security.LoginBody;
-import com.imooc.entitys.security.LoginUser;
 import com.imooc.service.UsersService;
-import com.imooc.utils.Constants;
 import com.imooc.utils.R;
-import com.imooc.utils.ServletUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 /**
  * 登录验证

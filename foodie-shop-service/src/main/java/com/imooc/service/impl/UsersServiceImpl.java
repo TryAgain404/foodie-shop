@@ -6,9 +6,11 @@ import com.imooc.entitys.Users;
 import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.security.LoginBody;
 import com.imooc.entitys.security.LoginUser;
+import com.imooc.framework.redis.RedisCache;
 import com.imooc.mapper.UsersMapper;
 import com.imooc.service.UsersService;
-import com.imooc.service.security.TokenService;
+import com.imooc.service.common.impl.TokenService;
+import com.imooc.utils.Constants;
 import com.imooc.utils.MD5Utils;
 import com.imooc.utils.enums.Sex;
 import com.imooc.utils.exception.RRException;
@@ -39,6 +41,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     @Autowired
     TokenService tokenService;
+    @Autowired
+    RedisCache redisCache;
 
     @Override
     public boolean getUsernameIsExit(String username) {
@@ -81,6 +85,15 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     @Override
     public String login(LoginBody user) {
+        String verifyKey = Constants.CAPTCHA_CODE_KEY + user.getUuid();
+        String captcha = redisCache.getCacheObject(verifyKey);
+
+        if (captcha == null) {
+            throw new RRException("验证码已失效");
+        }
+        if (!user.getCode().equalsIgnoreCase(captcha)) {
+            throw new RRException("验证码错误");
+        }
         Authentication authentication = null;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
