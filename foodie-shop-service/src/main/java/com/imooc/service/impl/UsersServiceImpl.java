@@ -85,7 +85,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
     @Override
     public String login(LoginBody user) {
-        String verifyKey = Constants.CAPTCHA_CODE_KEY + user.getUuid();
+        String verifyKey = Constants.CAPTCHA_CODE_IMAGE_KEY + user.getUuid();
         String captcha = redisCache.getCacheObject(verifyKey);
 
         if (captcha == null) {
