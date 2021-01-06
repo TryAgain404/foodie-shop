@@ -25,5 +25,9 @@ public interface UsersService extends IService<Users> {
     String login(LoginBody user);
 
     Users getUserByUsername(String username);
+
+    Users getUserByMobile(String mobile);
+
+    String mobileLogin(String moblie, String code);
 }
 

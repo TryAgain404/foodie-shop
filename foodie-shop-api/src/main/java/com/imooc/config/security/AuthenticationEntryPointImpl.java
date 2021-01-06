@@ -1,4 +1,4 @@
-package com.imooc.config;
+package com.imooc.config.security;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;

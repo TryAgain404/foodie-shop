@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.imooc.core.validate.code.filter.authentication.SmsAuthenticationToken;
 import com.imooc.entitys.Users;
 import com.imooc.entitys.bo.UserBO;
 import com.imooc.entitys.security.LoginBody;
@@ -114,6 +115,31 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     @Override
     public Users getUserByUsername(String username) {
         return getOne(new QueryWrapper<Users>().lambda().eq(Users::getUsername, username));
+    }
+
+    @Override
+    public Users getUserByMobile(String mobile) {
+        return getOne(new QueryWrapper<Users>().lambda().eq(Users::getMobile, mobile));
+    }
+
+    @Override
+    public String mobileLogin(String moblie, String code) {
+
+        Authentication authentication = null;
+        try {
+            // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+            authentication = authenticationManager
+                    .authenticate(new SmsAuthenticationToken(moblie));
+        } catch (Exception e) {
+            if (e instanceof BadCredentialsException) {
+                throw new RRException("用户不存在/密码错误");
+            } else {
+                throw new RRException(e.getMessage());
+            }
+        }
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        // 生成token
+        return tokenService.createToken(loginUser);
     }
 
     private void setNullProperty(Users userResult) {

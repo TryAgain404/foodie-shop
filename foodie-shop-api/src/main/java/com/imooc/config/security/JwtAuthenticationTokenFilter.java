@@ -1,4 +1,4 @@
-package com.imooc.config;
+package com.imooc.config.security;
 
 import com.imooc.entitys.security.LoginUser;
 import com.imooc.utils.SecurityUtils;

@@ -68,12 +68,14 @@ public class Constants {
      * 登录用户 redis key
      */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";
-
     /**
      * 验证码有效期（分钟）
      */
     public static final Integer CAPTCHA_EXPIRATION = 2;
-
+    /**
+     *
+     */
+    public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
     /**
      * 令牌
      */

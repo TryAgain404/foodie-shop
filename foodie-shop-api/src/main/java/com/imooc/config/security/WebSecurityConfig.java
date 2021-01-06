@@ -1,5 +1,7 @@
-package com.imooc.config;
+package com.imooc.config.security;
 
+import com.imooc.config.security.authentication.SmsAuthenticationProvider;
+import com.imooc.service.common.impl.UserDetailsByMobileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
+
+    @Autowired
+    UserDetailsByMobileServiceImpl userDetailsByMobileService;
     /**
      * 认证失败处理类
      */
@@ -33,13 +38,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     LogoutSuccessHandlerImpl logoutSuccessHandler;
-
     /**
      * token认证过滤器
      */
     @Autowired
     JwtAuthenticationTokenFilter authenticationTokenFilter;
 
+    @Autowired
+    private AuthenticationFailureHandlerImpl authenticationFailureHandler;
 
     @Bean
     @Override
@@ -49,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+
         httpSecurity
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
@@ -59,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/code/image").anonymous()
+                .antMatchers("/login", "/code/image", "/mobile/login").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -79,6 +86,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
+        SmsAuthenticationProvider smsCodeAuthenticationProvider = new SmsAuthenticationProvider();
+        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsByMobileService);
+        httpSecurity.authenticationProvider(smsCodeAuthenticationProvider);
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         // 添加JWT filter
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
