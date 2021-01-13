@@ -75,6 +75,10 @@ public class Constants {
     /**
      *
      */
+    public static final Integer length = 6;
+    /**
+     *
+     */
     public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
     /**
      * 令牌

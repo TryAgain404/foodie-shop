@@ -25,8 +25,6 @@ import java.io.IOException;
 public class CaptchaController {
 
     @Autowired
-    SysCaptchaService sysCaptchaService;
-    @Autowired
     ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
     /**

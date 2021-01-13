@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.imooc.core.validate.ValidateCode;
 import com.imooc.core.validate.code.filter.authentication.SmsAuthenticationToken;
 import com.imooc.entitys.Users;
 import com.imooc.entitys.bo.UserBO;
@@ -123,13 +124,15 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     }
 
     @Override
-    public String mobileLogin(String moblie, String code) {
-
+    public String mobileLogin(String mobile, String code) {
+        String verifyKey = Constants.CAPTCHA_CODE_SMS_KEY + mobile;
+        ValidateCode captcha = redisCache.getCacheObject(verifyKey);
+        System.err.println(captcha.getCode());
         Authentication authentication = null;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager
-                    .authenticate(new SmsAuthenticationToken(moblie));
+                    .authenticate(new SmsAuthenticationToken(mobile));
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
                 throw new RRException("用户不存在/密码错误");

@@ -27,9 +27,9 @@ public class SysLoginController {
     }
 
     @GetMapping("/mobile/login")
-    public R mobile(@RequestParam String moblie, @RequestParam String code) {
+    public R mobile(@RequestParam String mobile, @RequestParam String code) {
         // 生成令牌
-        String token = usersService.mobileLogin(moblie, code);
+        String token = usersService.mobileLogin(mobile, code);
         HashMap<String, Object> map = new HashMap<>();
         map.put("token", token);
         return R.success(map);

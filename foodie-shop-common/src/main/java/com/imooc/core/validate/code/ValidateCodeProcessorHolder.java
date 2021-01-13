@@ -1,5 +1,6 @@
 package com.imooc.core.validate.code;
 
+import com.imooc.enums.ValidateCodeType;
 import com.imooc.utils.exception.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

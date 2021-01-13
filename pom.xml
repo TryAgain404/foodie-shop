@@ -14,7 +14,6 @@
         <module>foodie-shop-mapper</module>
         <module>foodie-shop-pojo</module>
         <module>foodie-shop-common</module>
-        <module>foodie-shop-security</module>
     </modules>
 
     <parent>

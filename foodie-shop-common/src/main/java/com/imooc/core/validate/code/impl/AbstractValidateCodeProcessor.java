@@ -5,12 +5,10 @@ import com.imooc.core.validate.code.SysCaptchaService;
 import com.imooc.core.validate.code.ValidateCodeProcessor;
 import com.imooc.enums.ValidateCodeType;
 import com.imooc.framework.redis.RedisCache;
-import com.imooc.utils.Constants;
 import com.imooc.utils.exception.RRException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Map;
@@ -36,48 +34,8 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
         send(request, validateCode);
     }
 
-    protected abstract void send(ServletWebRequest request, T validateCode);
-
-    @Override
-    public void validate(ServletWebRequest servletWebRequest, String uuid) {
-        ValidateCodeType codeType = getValidateCodeType();
-        String verifyKey = "";
-        if (codeType.getParamNameOnValidate().equals("SMS")) {
-            verifyKey = Constants.CAPTCHA_CODE_SMS_KEY + uuid;
-        } else {
-            verifyKey = Constants.CAPTCHA_CODE_IMAGE_KEY + uuid;
-        }
-
-        T code = (T) redisCache.getCacheObject(verifyKey);
-
-        String codeInRequest;
-        try {
-            codeInRequest = ServletRequestUtils.getStringParameter(servletWebRequest.getRequest(),
-                    codeType.getParamNameOnValidate());
-        } catch (ServletRequestBindingException e) {
-            throw new RRException("获取验证码的值失败");
-        }
-
-        if (StringUtils.isBlank(codeInRequest)) {
-            throw new RRException(codeType + "验证码的值不能为空");
-        }
-
-        if (code == null) {
-            throw new RRException(codeType + "验证码不存在");
-        }
-
-        if (code.isExpried()) {
-            redisCache.deleteObject(verifyKey);
-            throw new RRException(codeType + "验证码已过期");
-        }
-
-        if (!StringUtils.equals(code.getCode(), codeInRequest)) {
-            throw new RRException(codeType + "验证码不匹配");
-        }
-
-        redisCache.deleteObject(verifyKey);
-
-    }
+    protected abstract void send(ServletWebRequest request, T validateCode)
+            throws ServletRequestBindingException;
 
     /**
      * 根据请求的url获取校验码的类型

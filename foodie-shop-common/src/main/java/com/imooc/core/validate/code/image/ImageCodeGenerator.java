@@ -8,6 +8,7 @@ import com.imooc.utils.Constants;
 import com.imooc.utils.StringUtils;
 import com.imooc.utils.exception.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @mail TryAgain500@163.com
  * @date 2021-1-4 15:06
  */
+@Service("imageSysCaptchaService")
 public class ImageCodeGenerator implements SysCaptchaService {
 
     @Autowired
