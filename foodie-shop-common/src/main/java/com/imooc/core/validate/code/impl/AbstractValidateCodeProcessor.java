@@ -38,17 +38,6 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
             throws ServletRequestBindingException;
 
     /**
-     * 根据请求的url获取校验码的类型
-     * @return
-     */
-    private ValidateCodeType getValidateCodeType() {
-        String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
-        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type.toUpperCase());
-        System.err.println(validateCodeType.getParamNameOnValidate());
-        return ValidateCodeType.valueOf(type.toUpperCase());
-    }
-
-    /**
      * 生成校验码
      *
      * @param request
@@ -63,5 +52,16 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
             throw new RRException("验证码生成器" + generatorName + "不存在");
         }
         return (T) validateCodeGenerator.getCaptcha(request);
+    }
+
+    /**
+     * 根据请求的url获取校验码的类型
+     * @return
+     */
+    private ValidateCodeType getValidateCodeType() {
+        String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
+        ValidateCodeType validateCodeType = ValidateCodeType.valueOf(type.toUpperCase());
+        System.err.println(validateCodeType.getParamNameOnValidate());
+        return ValidateCodeType.valueOf(type.toUpperCase());
     }
 }

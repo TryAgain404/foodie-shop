@@ -1,9 +1,7 @@
 package com.imooc.core.validate.code.image;
 
-import com.imooc.core.validate.ValidateCode;
 import com.imooc.core.validate.code.impl.AbstractValidateCodeProcessor;
 import com.imooc.framework.redis.RedisCache;
-import com.imooc.utils.Constants;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,8 +22,7 @@ public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode>
     @SneakyThrows
     @Override
     protected void send(ServletWebRequest request, ImageCode validateCode) {
-        ValidateCode code = redisCache.getCacheObject(Constants.CAPTCHA_CODE_IMAGE_KEY + "5eca4c55-e1fc-4604-8b4c-753a05884285");
-        System.err.println(code.getCode());
+        assert request.getResponse() != null;
         ImageIO.write(validateCode.getImage(), "JPEG", request.getResponse().getOutputStream());
     }
 }
