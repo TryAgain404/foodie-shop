@@ -11,7 +11,7 @@ killJava() {
   fi
 }
 
-cd $PROJECTPATH
+cd $PROJECTPATH/foodie-shop
 mvn clean install
 
 killJava
